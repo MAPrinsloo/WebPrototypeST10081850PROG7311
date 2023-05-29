@@ -1,0 +1,56 @@
+﻿@model WebPrototypeST10081850PROG7311.Models.CaptureStockModel
+@{
+    ViewBag.Title = "Capture Stock";
+}
+
+<style>
+    h2 {
+        text-align: center;
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@using (Html.BeginForm("btnCapture_Clicked", "Farmer", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.LabelFor(Model => Model.tblStock.PRODUCT.PRODUCT_TYPE, "PRODUCT TYPE", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownListFor(model => model.SelectedProductType, Model.ProductTypesList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.tblStock.WEIGHT, "WEIGHT (KG)", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.tblStock.WEIGHT, new { htmlAttributes = new { @class = "form-control", @min = 1 } })
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-25">Capture</button>
+            </div>
+        </div>
+    </div>
+}
+@*
+    References:
+    HTML Helpers
+    https://www.tutorialsteacher.com/mvc/html-helpers
+    jQuery Method
+    https://www.w3schools.com/jquery/event_change.asp
+    https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0
+    Maxlength
+    https://stackoverflow.com/questions/10784538/mvc3-maxlength-input
+    Dropdownlistfor
+    https://stackoverflow.com/questions/28902331/how-to-use-dropdown-list-in-cshtml
+    Minnimum for edditorfor
+    https://social.msdn.microsoft.com/Forums/en-US/0d729e0a-11a0-4cd0-9391-9b43a7d93062/how-do-you-add-min-and-max-limits-for-ints-on-a-razor-form?forum=aspmvc
+*@  

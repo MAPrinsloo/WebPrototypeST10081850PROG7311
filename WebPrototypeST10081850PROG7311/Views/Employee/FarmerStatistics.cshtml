@@ -1,0 +1,153 @@
+﻿@model WebPrototypeST10081850PROG7311.Models.FarmerStatisticsModel
+@{
+    ViewBag.Title = "Farmer Statistics";
+}
+<style>
+    h2 {
+        text-align: center;
+    }
+</style>
+<h2>@Html.ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm("btnSearch_Clicked", "Employee", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.SelectedFarmName, new { id = "SelectedFarmName" })
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.tblStock.PRODUCT.FARM.FARM_NAME, "FARM NAME", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownListFor(model => model.tblStock.PRODUCT.FARM.FARM_NAME, Model.FarmNamesList, "Select a farm", new { @class = "form-control", id = "FarmName" })
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-25">Search</button>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("btnFilter_Clicked", "Employee", FormMethod.Post, new { id = "filterForm" }))
+{
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @Html.LabelFor(Model => Model.tblStock.PRODUCT.PRODUCT_TYPE, "PRODUCT TYPE", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownListFor(model => model.tblStock.PRODUCT.PRODUCT_TYPE, Model.ProductTypesList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label class="control-label col-md-2" for="DATE_RANGE">DATE RANGE</label>
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="StartDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="EndDate" class="form-control">
+                </div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="tblStock.DATE_DELIVERED" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="row justify-content-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-25">Filter</button>
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StockList.First().S_ID)
+        </th>
+        <th>
+            @Html.DisplayName("WEIGHT (KG)")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockList.First().PRODUCT.PRODUCT_TYPE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockList.First().PRODUCT.FARM.FARM_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockList.First().DATE_DELIVERED)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockList.First().PRODUCT.F_ID)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.StockList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.S_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WEIGHT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODUCT.PRODUCT_TYPE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODUCT.FARM.FARM_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATE_DELIVERED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODUCT.F_ID)
+            </td>
+        </tr>
+    }
+</table>
+@section scripts {
+    <script>
+        $(document).ready
+            (function () {
+                //Event handler for the farm name dropdown change event.
+                $('#FarmName').change
+                    (function () {
+                        var selectedFarmName = $(this).val();
+                        $('#SelectedFarmName').val(selectedFarmName);
+                    }
+                    );
+
+                //Submit the filter form when the filter button is clicked.
+                $('#filterForm').submit
+                    (function (event) {
+                        //Prevent the default form submission.
+                        event.preventDefault();
+                        //Unbind the handler and submit the form.
+                        $(this).unbind('submit').submit();
+                    }
+                    );
+            }
+            );
+    </script>
+}
+    @*
+    References:
+    HTML Helpers
+    https://www.tutorialsteacher.com/mvc/html-helpers
+    jQuery Method
+    https://www.w3schools.com/jquery/event_change.asp
+    https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0
+    Maxlength
+    https://stackoverflow.com/questions/10784538/mvc3-maxlength-input
+    Dropdownlistfor
+    https://stackoverflow.com/questions/28902331/how-to-use-dropdown-list-in-cshtml
+    Minnimum for edditorfor
+    https://social.msdn.microsoft.com/Forums/en-US/0d729e0a-11a0-4cd0-9391-9b43a7d93062/how-do-you-add-min-and-max-limits-for-ints-on-a-razor-form?forum=aspmvc
+    *@  

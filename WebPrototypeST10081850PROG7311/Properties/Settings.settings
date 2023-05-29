@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebPrototypeST10081850PROG7311.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;metadata=res://*/FarmCentralEDM.csdl|res://*/FarmCentralEDM.ssdl|res://*/FarmCentralEDM.msl;provider=System.Data.SqlClient;provider connection string="data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\FarmCentralDB.mdf;integrated security=True;multiple active result sets=True;connect timeout=30;application name=EntityFramework;MultipleActiveResultSets=True"&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">metadata=res://*/FarmCentralEDM.csdl|res://*/FarmCentralEDM.ssdl|res://*/FarmCentralEDM.msl;provider=System.Data.SqlClient;provider connection string="data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\FarmCentralDB.mdf;integrated security=True;multiple active result sets=True;connect timeout=30;application name=EntityFramework;MultipleActiveResultSets=True"</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

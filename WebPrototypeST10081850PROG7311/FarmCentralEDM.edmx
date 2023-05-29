@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FarmCentralDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FARM">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FARM_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="PWORD_ID" />
+          </Key>
+          <Property Name="PWORD_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PRODUCT_TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="F_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STOCK">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WEIGHT" Type="int" Nullable="false" />
+          <Property Name="DATE_DELIVERED" Type="date" Nullable="false" />
+          <Property Name="P_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="U_ID" />
+          </Key>
+          <Property Name="U_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NAME" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="USERNAME" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="USER_TYPE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PWORD_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FARM_FK1">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="FARM" Type="Self.FARM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="FARM">
+              <PropertyRef Name="U_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK1">
+          <End Role="FARM" Type="Self.FARM" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FARM">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="F_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="STOCK_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="STOCK" Type="Self.STOCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="STOCK">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USER_FK1">
+          <End Role="PASSWORD" Type="Self.PASSWORD" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PASSWORD">
+              <PropertyRef Name="PWORD_ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="PWORD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FarmCentralDBModelStoreContainer">
+          <EntitySet Name="FARM" EntityType="Self.FARM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PASSWORD" EntityType="Self.PASSWORD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STOCK" EntityType="Self.STOCK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FARM_FK1" Association="Self.FARM_FK1">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FARM" EntitySet="FARM" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
+            <End Role="FARM" EntitySet="FARM" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="STOCK_FK1" Association="Self.STOCK_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="STOCK" EntitySet="STOCK" />
+          </AssociationSet>
+          <AssociationSet Name="USER_FK1" Association="Self.USER_FK1">
+            <End Role="PASSWORD" EntitySet="PASSWORD" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FarmCentralDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FARM">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Guid" Nullable="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FARM_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="U_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FARM_FK1" FromRole="FARM" ToRole="USER" />
+          <NavigationProperty Name="PRODUCTs" Relationship="Self.PRODUCT_FK1" FromRole="FARM" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="PASSWORD">
+          <Key>
+            <PropertyRef Name="PWORD_ID" />
+          </Key>
+          <Property Name="PWORD_ID" Type="Guid" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USERs" Relationship="Self.USER_FK1" FromRole="PASSWORD" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Guid" Nullable="false" />
+          <Property Name="PRODUCT_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="F_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="FARM" Relationship="Self.PRODUCT_FK1" FromRole="PRODUCT" ToRole="FARM" />
+          <NavigationProperty Name="STOCKs" Relationship="Self.STOCK_FK1" FromRole="PRODUCT" ToRole="STOCK" />
+        </EntityType>
+        <EntityType Name="STOCK">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="Guid" Nullable="false" />
+          <Property Name="WEIGHT" Type="Int32" Nullable="false" />
+          <Property Name="DATE_DELIVERED" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="P_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.STOCK_FK1" FromRole="STOCK" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="U_ID" />
+          </Key>
+          <Property Name="U_ID" Type="Guid" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USER_TYPE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PWORD_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="FARMs" Relationship="Self.FARM_FK1" FromRole="USER" ToRole="FARM" />
+          <NavigationProperty Name="PASSWORD" Relationship="Self.USER_FK1" FromRole="USER" ToRole="PASSWORD" />
+        </EntityType>
+        <Association Name="FARM_FK1">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="FARM" Type="Self.FARM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="FARM">
+              <PropertyRef Name="U_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK1">
+          <End Role="FARM" Type="Self.FARM" Multiplicity="1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FARM">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="F_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USER_FK1">
+          <End Role="PASSWORD" Type="Self.PASSWORD" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PASSWORD">
+              <PropertyRef Name="PWORD_ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="PWORD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="STOCK_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="STOCK" Type="Self.STOCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="STOCK">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FarmCentralDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FARMs" EntityType="Self.FARM" />
+          <EntitySet Name="PASSWORDs" EntityType="Self.PASSWORD" />
+          <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
+          <EntitySet Name="STOCKs" EntityType="Self.STOCK" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <AssociationSet Name="FARM_FK1" Association="Self.FARM_FK1">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="FARM" EntitySet="FARMs" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
+            <End Role="FARM" EntitySet="FARMs" />
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+          </AssociationSet>
+          <AssociationSet Name="USER_FK1" Association="Self.USER_FK1">
+            <End Role="PASSWORD" EntitySet="PASSWORDs" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="STOCK_FK1" Association="Self.STOCK_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="STOCK" EntitySet="STOCKs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FarmCentralDBModelStoreContainer" CdmEntityContainer="FarmCentralDBEntities">
+          <EntitySetMapping Name="FARMs">
+            <EntityTypeMapping TypeName="FarmCentralDBModel.FARM">
+              <MappingFragment StoreEntitySet="FARM">
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="FARM_NAME" ColumnName="FARM_NAME" />
+                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PASSWORDs">
+            <EntityTypeMapping TypeName="FarmCentralDBModel.PASSWORD">
+              <MappingFragment StoreEntitySet="PASSWORD">
+                <ScalarProperty Name="PWORD_ID" ColumnName="PWORD_ID" />
+                <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTs">
+            <EntityTypeMapping TypeName="FarmCentralDBModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STOCKs">
+            <EntityTypeMapping TypeName="FarmCentralDBModel.STOCK">
+              <MappingFragment StoreEntitySet="STOCK">
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+                <ScalarProperty Name="DATE_DELIVERED" ColumnName="DATE_DELIVERED" />
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="FarmCentralDBModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_TYPE" ColumnName="USER_TYPE" />
+                <ScalarProperty Name="PWORD_ID" ColumnName="PWORD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Sign Out";
+}
+
+<style>
+    h2 {
+        text-align: center;
+    }
+</style>
+
+<br>
+<h2>@Html.ViewBag.Title</h2>
+<hr />
+
+@using (@Html.BeginForm("btnSignOut_Clicked", "Home", FormMethod.Post))
+{
+    <div class="form-group text-center">
+        @Html.Label("btnSignOut", "Would you like to sign out of your account?")
+        <div>
+            <br>
+            <button type="submit" id="btnSignOut" class="btn btn-primary w-25">Sign Out</button>
+        </div>
+    </div>
+}
+@*
+    References:
+    HTML Helpers
+    https://www.tutorialsteacher.com/mvc/html-helpers
+    jQuery Method
+    https://www.w3schools.com/jquery/event_change.asp
+    https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0
+    Maxlength
+    https://stackoverflow.com/questions/10784538/mvc3-maxlength-input
+    Dropdownlistfor
+    https://stackoverflow.com/questions/28902331/how-to-use-dropdown-list-in-cshtml
+    Minnimum for edditorfor
+    https://social.msdn.microsoft.com/Forums/en-US/0d729e0a-11a0-4cd0-9391-9b43a7d93062/how-do-you-add-min-and-max-limits-for-ints-on-a-razor-form?forum=aspmvc
+*@  

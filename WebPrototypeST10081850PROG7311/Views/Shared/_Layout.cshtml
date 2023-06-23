@@ -4,53 +4,74 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style>
+        /* Font style for navbar brand */
+        .navbar-brand {
+            font-family: "Arial", sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            /* Additional font properties if desired */
+        }
+
+        /* Font style for navigation items */
+        .nav-link {
+            font-family: "Arial", sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            /* Additional font properties if desired */
+        }
+    </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+
+<body style="background-color:rosybrown">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background-color:mistyrose;">
         <div class="container">
             <!-- -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             @if (Session["UserLoggedIn"] == null)
             {
-                @Html.ActionLink("Farm Central", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(" Farm Central", "Login", "Home", new { area = "" }, new { @class = "navbar-brand fa fa-home ", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink(" Login", "Login", "Home", new { area = "" }, new { @class = "nav-link fa fa-sign-in", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
                     </ul>
                 </div>
             }
             @if ((string)Session["LoggedUser_Type"] == "EMPLOYEE")
             {
-                @Html.ActionLink("Farm Central", "FarmerStatistics", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(" Farm Central", "FarmerStatistics", "Employee", new { area = "" }, new { @class = "navbar-brand fa fa-home ", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Farmer Statistics", "FarmerStatistics", "Employee", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Manage Farmers", "ManageFarmers", "Employee", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Sign Out", "SignOut", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink(" Farmer Statistics", "FarmerStatistics", "Employee", new { area = "" }, new { @class = "nav-link fa fa-bar-chart", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
+                        <li>@Html.ActionLink(" Manage Farmers", "ManageFarmers", "Employee", new { area = "" }, new { @class = "nav-link fa fa-user-plus", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
+                        <li>@Html.ActionLink(" Sign Out", "SignOut", "Home", new { area = "" }, new { @class = "nav-link fa fa-sign-out fa fa-sign-out", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
                     </ul>
                 </div>
             }
             @if ((string)Session["LoggedUser_Type"] == "FARMER")
             {
-                @Html.ActionLink("Farm Central", "ManageProducts", "Farmer", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(" Farm Central", "ManageProducts", "Farmer", new { area = "" }, new { @class = "navbar-brand fa fa-home ", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Manage Products", "ManageProducts", "Farmer", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Capture Stock", "CaptureStock", "Farmer", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Sign Out", "SignOut", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink(" Manage Products", "ManageProducts", "Farmer", new { area = "" }, new { @class = "nav-link fa fa-leaf", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
+                        <li>@Html.ActionLink(" Capture Stock", "CaptureStock", "Farmer", new { area = "" }, new { @class = "nav-link fa fa-truck", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
+                        <li>@Html.ActionLink(" Sign Out", "SignOut", "Home", new { area = "" }, new { @class = "nav-link fa fa-sign-out", style = "font-size: 25px; font-style: normal; font-weight: 700; color: #000000;" })</li>
                     </ul>
                 </div>
             }
@@ -62,6 +83,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Matthew Prinsloo ST10081850</p>
+
         </footer>
     </div>
 
@@ -70,3 +92,6 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<!--
+nav icons-https://www.w3schools.com/howto/howto_css_navbar_icon.asp
+-->

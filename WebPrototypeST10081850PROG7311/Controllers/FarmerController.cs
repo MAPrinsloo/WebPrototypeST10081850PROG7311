@@ -90,6 +90,7 @@ namespace WebPrototypeST10081850PROG7311.Controllers
                     //Update the tbl product.
                     model.tblProduct = new WebPrototypeST10081850PROG7311.PRODUCT();
 
+                    TempData["SuccessMessage"] = "Product Created.";
                     return View("ManageProducts", model);
                 }
                 else
@@ -171,6 +172,7 @@ namespace WebPrototypeST10081850PROG7311.Controllers
                     db.SaveChanges();
                     //use CaptureStock to repopulate and show the CaptureStock view.
                     CaptureStock();
+                    TempData["SuccessMessage"] = "Stock Captured.";
                     return View("CaptureStock");
                 }
                 else
@@ -214,3 +216,5 @@ namespace WebPrototypeST10081850PROG7311.Controllers
 /// https://learn.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions
 /// Simple Login Application using Sessions in ASP.NET MVC
 /// https://www.c-sharpcorner.com/article/simple-login-application-using-Asp-Net-mvc/
+/// tempdata
+/// https://www.tutorialsteacher.com/mvc/tempdata-in-asp.net-mvc#:~:text=ASP.NET%20MVC%20%2D%20TempData,it%20after%20retrieving%20a%20value.

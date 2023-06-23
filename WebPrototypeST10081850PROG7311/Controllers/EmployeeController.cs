@@ -215,7 +215,7 @@ namespace WebPrototypeST10081850PROG7311.Controllers
 
                     db.FARMs.Add(newFarm);
                     db.SaveChanges();
-
+                    TempData["SuccessMessage"] = "Farmer Successfully Created.";
                     return View("ManageFarmers");
                 }
                 else
@@ -260,3 +260,5 @@ namespace WebPrototypeST10081850PROG7311.Controllers
 /// https://learn.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions
 /// Simple Login Application using Sessions in ASP.NET MVC
 /// https://www.c-sharpcorner.com/article/simple-login-application-using-Asp-Net-mvc/
+/// tempdata
+/// https://www.tutorialsteacher.com/mvc/tempdata-in-asp.net-mvc#:~:text=ASP.NET%20MVC%20%2D%20TempData,it%20after%20retrieving%20a%20value.
